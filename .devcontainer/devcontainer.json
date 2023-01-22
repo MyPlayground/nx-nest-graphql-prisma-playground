@@ -50,13 +50,15 @@
 				"dbaeumer.vscode-eslint",
 				"donjayamanne.githistory",
 				"eamodio.gitlens",
+				"EditorConfig.EditorConfig",
 				"esbenp.prettier-vscode",
 				"firsttris.vscode-jest-runner",
 				"mhutchie.git-graph",
 				"mtxr.sqltools-driver-pg",
 				"mtxr.sqltools",
-				"nrwl.angular-console",
-				"oderwat.indent-rainbow"
+				"nrwl.angular-console@17.26.0",
+				"oderwat.indent-rainbow",
+				"Prisma.prisma"
 			]
 		}
 	},
