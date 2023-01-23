@@ -10,4 +10,14 @@ type User {
 
 type Query {
   user(id: Int!): User!
+  users: [User!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): User!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String
 }
