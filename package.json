@@ -2,13 +2,19 @@
   "name": "nx-nest-graphql-prisma-playground",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx run backend:serve"
+  },
   "private": true,
   "dependencies": {
+    "@nestjs/apollo": "^10.1.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.1.7",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.9.0",
+    "apollo-server-express": "^3.11.1",
+    "graphql": "^16.6.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "tslib": "^2.3.0"
