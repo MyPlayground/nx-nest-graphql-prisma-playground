@@ -10,7 +10,12 @@ type User {
 
 type Query {
   user(id: Int!): User!
-  users: [User!]!
+  users(offset: OffsetPaginationInput!): [User!]!
+}
+
+input OffsetPaginationInput {
+  take: Int!
+  skip: Int!
 }
 
 type Mutation {
