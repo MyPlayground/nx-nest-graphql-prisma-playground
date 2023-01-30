@@ -1,5 +1,4 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ValidateNested } from 'class-validator';
 import { PrismaService } from 'nestjs-prisma';
 import { User, UserCreateInput } from './models';
 import { OffsetPaginationInput } from './models/offset-pagination.input';
@@ -22,7 +21,6 @@ export class AppResolver {
   }
 
   @Mutation(() => User)
-  @ValidateNested()
   async createUser(@Args('data') data: UserCreateInput): Promise<User> {
     return await this.prisma.user.create({ data });
   }
