@@ -2,6 +2,113 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LikeCountAggregate {
+  like_id: Int!
+  user_id: Int!
+  tweet_id: Int!
+  _all: Int!
+}
+
+type LikeAvgAggregate {
+  like_id: Float
+  user_id: Float
+  tweet_id: Float
+}
+
+type LikeSumAggregate {
+  like_id: Int
+  user_id: Int
+  tweet_id: Int
+}
+
+type LikeMinAggregate {
+  like_id: Int
+  user_id: Int
+  tweet_id: Int
+}
+
+type LikeMaxAggregate {
+  like_id: Int
+  user_id: Int
+  tweet_id: Int
+}
+
+type TweetCount {
+  likes: Int!
+}
+
+type Tweet {
+  tweet_id: ID!
+  tweet_text: String!
+  created_at: DateTime!
+  author: User!
+  user_id: Int!
+  likes: [Like!]
+  _count: TweetCount!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserCount {
+  tweets: Int!
+  likes: Int!
+}
+
+type User {
+  user_id: ID!
+  username: String!
+  password: String!
+  email: String!
+  profile_image: String
+  created_at: DateTime!
+  tweets: [Tweet!]
+  likes: [Like!]
+  _count: UserCount!
+}
+
+type Like {
+  like_id: ID!
+  user_id: Int!
+  tweet_id: Int!
+  user: User!
+  tweet: Tweet!
+}
+
+type TweetCountAggregate {
+  tweet_id: Int!
+  tweet_text: Int!
+  created_at: Int!
+  user_id: Int!
+  _all: Int!
+}
+
+type TweetAvgAggregate {
+  tweet_id: Float
+  user_id: Float
+}
+
+type TweetSumAggregate {
+  tweet_id: Int
+  user_id: Int
+}
+
+type TweetMinAggregate {
+  tweet_id: Int
+  tweet_text: String
+  created_at: DateTime
+  user_id: Int
+}
+
+type TweetMaxAggregate {
+  tweet_id: Int
+  tweet_text: String
+  created_at: DateTime
+  user_id: Int
+}
+
 type UserCountAggregate {
   user_id: Int!
   username: Int!
@@ -29,11 +136,6 @@ type UserMinAggregate {
   created_at: DateTime
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type UserMaxAggregate {
   user_id: Int
   username: String
@@ -43,52 +145,19 @@ type UserMaxAggregate {
   created_at: DateTime
 }
 
-type UserCount {
-  tweets: Int!
-  likes: Int!
-}
-
-type Like {
-  like_id: ID!
-  user_id: Int!
-  tweet_id: Int!
-  user: User!
-  tweet: Tweet!
-}
-
-type TweetCount {
-  likes: Int!
-}
-
-type Tweet {
-  tweet_id: ID!
-  tweet_text: String!
-  created_at: DateTime!
-  author: User!
-  user_id: Int!
-  likes: [Like!]
-  _count: TweetCount!
-}
-
-type User {
-  user_id: ID!
-  username: String!
-  password: String!
-  email: String!
-  profile_image: String
-  created_at: DateTime!
-  tweets: [Tweet!]
-  likes: [Like!]
-  _count: UserCount!
-}
-
 type Query {
-  user(id: Float!): User
-  users: [User!]
+  user(id: Int!): User
+  users: [User!]!
+  tweet(id: Int!): Tweet
+  tweets: [Tweet!]!
+  like(id: Int!): Like
+  likes: [Like!]!
 }
 
 type Mutation {
   createUser(input: UserCreateInput!): User!
+  createTweet(input: TweetCreateInput!): Tweet!
+  createLike(input: LikeCreateInput!): Like!
 }
 
 input UserCreateInput {
@@ -251,4 +320,16 @@ input LikeCreateManyUserInputEnvelope {
 input LikeCreateManyUserInput {
   like_id: Int
   tweet_id: Int!
+}
+
+input TweetCreateInput {
+  tweet_text: String!
+  created_at: DateTime!
+  author: UserCreateNestedOneWithoutTweetsInput!
+  likes: LikeCreateNestedManyWithoutTweetInput
+}
+
+input LikeCreateInput {
+  user: UserCreateNestedOneWithoutLikesInput!
+  tweet: TweetCreateNestedOneWithoutLikesInput!
 }

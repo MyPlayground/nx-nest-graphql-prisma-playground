@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run backend:serve"
+    "start": "nx run backend:serve",
+    "prisma:reset": "npx prisma migrate reset --preview-feature",
+    "prisma:studio": "npx prisma studio",
+    "prisma:db:push": "npx prisma db push"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "private": true,
   "dependencies": {

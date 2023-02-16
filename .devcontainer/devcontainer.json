@@ -52,6 +52,7 @@
 				"eamodio.gitlens",
 				"EditorConfig.EditorConfig",
 				"esbenp.prettier-vscode",
+        "GraphQL.vscode-graphql",
 				"firsttris.vscode-jest-runner",
 				"mhutchie.git-graph",
 				"mtxr.sqltools-driver-pg",

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { UserResolver } from './resolvers/user/user.resolver';
+import { LikeResolver } from './resolvers/like.resolver';
+import { TweetResolver } from './resolvers/tweet.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
 @Module({
-  providers: [UserResolver],
+  providers: [UserResolver, TweetResolver, LikeResolver],
 })
 export class SchemaModule {}
