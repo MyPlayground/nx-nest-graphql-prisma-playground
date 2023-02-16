@@ -5,9 +5,7 @@ import { PrismaModule } from 'nestjs-prisma';
 
 import * as path from 'path';
 
-import { AppController } from './app.controller';
-import { AppResolver } from './app.resolver';
-import { AppService } from './app.service';
+import { SchemaModule } from './modules/schema/schema.module';
 
 @Module({
   imports: [
@@ -19,8 +17,7 @@ import { AppService } from './app.service';
       // autoSchemaFile: path.join(__dirname, 'schema.gql'), // 本番用
     }),
     PrismaModule.forRoot({ isGlobal: true }),
+    SchemaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, AppResolver],
 })
 export class AppModule {}

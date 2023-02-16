@@ -2,27 +2,253 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserCountAggregate {
+  user_id: Int!
+  username: Int!
+  password: Int!
+  email: Int!
+  profile_image: Int!
+  created_at: Int!
+  _all: Int!
+}
+
+type UserAvgAggregate {
+  user_id: Float
+}
+
+type UserSumAggregate {
+  user_id: Int
+}
+
+type UserMinAggregate {
+  user_id: Int
+  username: String
+  password: String
+  email: String
+  profile_image: String
+  created_at: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserMaxAggregate {
+  user_id: Int
+  username: String
+  password: String
+  email: String
+  profile_image: String
+  created_at: DateTime
+}
+
+type UserCount {
+  tweets: Int!
+  likes: Int!
+}
+
+type Like {
+  like_id: ID!
+  user_id: Int!
+  tweet_id: Int!
+  user: User!
+  tweet: Tweet!
+}
+
+type TweetCount {
+  likes: Int!
+}
+
+type Tweet {
+  tweet_id: ID!
+  tweet_text: String!
+  created_at: DateTime!
+  author: User!
+  user_id: Int!
+  likes: [Like!]
+  _count: TweetCount!
+}
+
 type User {
-  id: ID!
+  user_id: ID!
+  username: String!
+  password: String!
   email: String!
-  name: String
+  profile_image: String
+  created_at: DateTime!
+  tweets: [Tweet!]
+  likes: [Like!]
+  _count: UserCount!
 }
 
 type Query {
-  user(id: Int!): User!
-  users(offset: OffsetPaginationInput!): [User!]!
-}
-
-input OffsetPaginationInput {
-  take: Int!
-  skip: Int!
+  user(id: Float!): User
+  users: [User!]
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): User!
+  createUser(input: UserCreateInput!): User!
 }
 
-input CreateUserInput {
+input UserCreateInput {
+  username: String!
+  password: String!
   email: String!
-  name: String
+  profile_image: String
+  created_at: DateTime!
+  tweets: TweetCreateNestedManyWithoutAuthorInput
+  likes: LikeCreateNestedManyWithoutUserInput
+}
+
+input TweetCreateNestedManyWithoutAuthorInput {
+  create: [TweetCreateWithoutAuthorInput!]
+  connectOrCreate: [TweetCreateOrConnectWithoutAuthorInput!]
+  createMany: TweetCreateManyAuthorInputEnvelope
+  connect: [TweetWhereUniqueInput!]
+}
+
+input TweetCreateWithoutAuthorInput {
+  tweet_text: String!
+  created_at: DateTime!
+  likes: LikeCreateNestedManyWithoutTweetInput
+}
+
+input LikeCreateNestedManyWithoutTweetInput {
+  create: [LikeCreateWithoutTweetInput!]
+  connectOrCreate: [LikeCreateOrConnectWithoutTweetInput!]
+  createMany: LikeCreateManyTweetInputEnvelope
+  connect: [LikeWhereUniqueInput!]
+}
+
+input LikeCreateWithoutTweetInput {
+  user: UserCreateNestedOneWithoutLikesInput!
+}
+
+input UserCreateNestedOneWithoutLikesInput {
+  create: UserCreateWithoutLikesInput
+  connectOrCreate: UserCreateOrConnectWithoutLikesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutLikesInput {
+  username: String!
+  password: String!
+  email: String!
+  profile_image: String
+  created_at: DateTime!
+  tweets: TweetCreateNestedManyWithoutAuthorInput
+}
+
+input UserCreateOrConnectWithoutLikesInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutLikesInput!
+}
+
+input UserWhereUniqueInput {
+  user_id: Int
+  username: String
+  email: String
+}
+
+input LikeCreateOrConnectWithoutTweetInput {
+  where: LikeWhereUniqueInput!
+  create: LikeCreateWithoutTweetInput!
+}
+
+input LikeWhereUniqueInput {
+  like_id: Int
+}
+
+input LikeCreateManyTweetInputEnvelope {
+  data: [LikeCreateManyTweetInput!]!
+  skipDuplicates: Boolean
+}
+
+input LikeCreateManyTweetInput {
+  like_id: Int
+  user_id: Int!
+}
+
+input TweetCreateOrConnectWithoutAuthorInput {
+  where: TweetWhereUniqueInput!
+  create: TweetCreateWithoutAuthorInput!
+}
+
+input TweetWhereUniqueInput {
+  tweet_id: Int
+}
+
+input TweetCreateManyAuthorInputEnvelope {
+  data: [TweetCreateManyAuthorInput!]!
+  skipDuplicates: Boolean
+}
+
+input TweetCreateManyAuthorInput {
+  tweet_id: Int
+  tweet_text: String!
+  created_at: DateTime!
+}
+
+input LikeCreateNestedManyWithoutUserInput {
+  create: [LikeCreateWithoutUserInput!]
+  connectOrCreate: [LikeCreateOrConnectWithoutUserInput!]
+  createMany: LikeCreateManyUserInputEnvelope
+  connect: [LikeWhereUniqueInput!]
+}
+
+input LikeCreateWithoutUserInput {
+  tweet: TweetCreateNestedOneWithoutLikesInput!
+}
+
+input TweetCreateNestedOneWithoutLikesInput {
+  create: TweetCreateWithoutLikesInput
+  connectOrCreate: TweetCreateOrConnectWithoutLikesInput
+  connect: TweetWhereUniqueInput
+}
+
+input TweetCreateWithoutLikesInput {
+  tweet_text: String!
+  created_at: DateTime!
+  author: UserCreateNestedOneWithoutTweetsInput!
+}
+
+input UserCreateNestedOneWithoutTweetsInput {
+  create: UserCreateWithoutTweetsInput
+  connectOrCreate: UserCreateOrConnectWithoutTweetsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTweetsInput {
+  username: String!
+  password: String!
+  email: String!
+  profile_image: String
+  created_at: DateTime!
+  likes: LikeCreateNestedManyWithoutUserInput
+}
+
+input UserCreateOrConnectWithoutTweetsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutTweetsInput!
+}
+
+input TweetCreateOrConnectWithoutLikesInput {
+  where: TweetWhereUniqueInput!
+  create: TweetCreateWithoutLikesInput!
+}
+
+input LikeCreateOrConnectWithoutUserInput {
+  where: LikeWhereUniqueInput!
+  create: LikeCreateWithoutUserInput!
+}
+
+input LikeCreateManyUserInputEnvelope {
+  data: [LikeCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input LikeCreateManyUserInput {
+  like_id: Int
+  tweet_id: Int!
 }

@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Prisma
-/prisma/@generated
+@generated
