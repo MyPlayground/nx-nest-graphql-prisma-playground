@@ -7,7 +7,7 @@ generator client {
 
 generator nestgraphql {
   provider = "prisma-nestjs-graphql"
-  output   = "../apps/backend/src/app/@generated/prisma-nestjs-graphql"
+  output   = "../libs/prisma-nestjs-graphql/src/@generated"
   reExport = Directories
 }
 

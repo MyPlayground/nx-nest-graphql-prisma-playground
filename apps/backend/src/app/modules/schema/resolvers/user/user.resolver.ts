@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { PrismaService } from 'nestjs-prisma';
 import {
   User,
   UserCreateInput,
-} from '../../../../@generated/prisma-nestjs-graphql/user';
+} from '@nx-nest-graphql-prisma-playground/prisma-nestjs-graphql';
+import { PrismaService } from 'nestjs-prisma';
 
 @Resolver(() => User)
 export class UserResolver {

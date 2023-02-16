@@ -1,0 +1,26 @@
+{
+  "name": "prisma-nestjs-graphql",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/prisma-nestjs-graphql/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/prisma-nestjs-graphql",
+        "main": "libs/prisma-nestjs-graphql/src/index.ts",
+        "tsConfig": "libs/prisma-nestjs-graphql/tsconfig.lib.json",
+        "assets": ["libs/prisma-nestjs-graphql/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/prisma-nestjs-graphql/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

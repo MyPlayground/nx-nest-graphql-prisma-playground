@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-nest-graphql-prisma-playground/prisma-nestjs-graphql": [
+        "libs/prisma-nestjs-graphql/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
