@@ -9,6 +9,7 @@ import { ValidationError } from 'apollo-server-express';
 import { PrismaService } from 'nestjs-prisma';
 
 import { AppModule } from './app/app.module';
+import { CustomExceptionFilter } from './app/common/exceptions/custom-exception';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,8 @@ async function bootstrap() {
   const globalPrefix = 'api';
 
   app.setGlobalPrefix(globalPrefix);
+
+  app.useGlobalFilters(new CustomExceptionFilter());
 
   // バリデーションエラー時の詳細出力
   // https://zenn.dev/yuyuyu_6/articles/98dc86448ea633
@@ -47,9 +50,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3333;
   await app.listen(port);
 
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
-  );
+  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();
